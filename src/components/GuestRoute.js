@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
 
-const GuestRoute = ({ user, children }) => {
+const GuestRoute = ({ children }) => {
   const token = localStorage.getItem('token')
     ? localStorage.getItem('token')
     : null

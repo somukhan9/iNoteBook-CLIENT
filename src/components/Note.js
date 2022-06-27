@@ -7,7 +7,7 @@ const Note = (props) => {
   const { loadingNote, deleteNote } = useContext(NoteContext)
 
   if (loadingNote) {
-    return <h1>Loading Notes...</h1>
+    return <h1 className="text-center my-4">Loading Notes...</h1>
   }
 
   return (
