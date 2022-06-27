@@ -6,7 +6,7 @@ const AuthContext = createContext()
 const AuthProvider = ({ children }) => {
   const token = localStorage.getItem('token')
     ? localStorage.getItem('token')
-    : ''
+    : null
 
   const navigate = useNavigate()
 
