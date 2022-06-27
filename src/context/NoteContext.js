@@ -5,7 +5,7 @@ const NoteContext = createContext()
 
 const NoteProvider = ({ children }) => {
   const token = localStorage.getItem('token')
-    ? JSON.parse(localStorage.getItem('token'))
+    ? localStorage.getItem('token')
     : null
 
   const navigate = useNavigate()
