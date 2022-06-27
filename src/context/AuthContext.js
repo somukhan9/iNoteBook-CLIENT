@@ -5,7 +5,7 @@ const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
   const token = localStorage.getItem('token')
-    ? JSON.parse(localStorage.getItem('token'))
+    ? localStorage.getItem('token')
     : ''
 
   const navigate = useNavigate()
@@ -53,7 +53,7 @@ const AuthProvider = ({ children }) => {
       })
       const json = await response.json()
       if (response.status === 200) {
-        localStorage.setItem('token', JSON.stringify(json.token))
+        localStorage.setItem('token', json.token)
         navigate('/')
       } else if (response.status === 400) {
         alert(json.msg)
@@ -78,7 +78,7 @@ const AuthProvider = ({ children }) => {
       })
       const json = await response.json()
       if (response.status === 201) {
-        localStorage.setItem('token', JSON.stringify(json.token))
+        localStorage.setItem('token', json.token)
         navigate('/')
       } else if (response.status === 400) {
         alert(json.msg)

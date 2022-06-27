@@ -4,7 +4,7 @@ import { NoteContext } from '../context/NoteContext'
 
 const NoteForm = (props) => {
   const token = localStorage.getItem('token')
-    ? JSON.parse(localStorage.getItem('token'))
+    ? localStorage.getItem('token')
     : null
 
   const params = useParams()

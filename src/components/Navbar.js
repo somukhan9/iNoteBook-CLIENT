@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext'
 
 const Navbar = () => {
   const token = localStorage.getItem('token')
-    ? JSON.parse(localStorage.getItem('token'))
+    ? localStorage.getItem('token')
     : null
 
   const { logoutUser } = useContext(AuthContext)

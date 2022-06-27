@@ -5,8 +5,6 @@ import Note from './Note'
 const Notes = () => {
   const { notes, loadingNote } = useContext(NoteContext)
 
-  // console.log(notes)
-
   return (
     <div className="row">
       <p className="my-2">
