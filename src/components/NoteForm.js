@@ -7,8 +7,11 @@ const NoteForm = (props) => {
     ? localStorage.getItem('token')
     : null
 
+  const BASE_URL = process.env.REACT_APP_BASE_URL
+
   const params = useParams()
-  const { loadingNote, createNote, updateNote } = useContext(NoteContext)
+  const { loadingNote, setLoadingNote, createNote, updateNote } =
+    useContext(NoteContext)
   const [note, setNote] = useState({ title: '', description: '' })
 
   const handleOnChange = (e) => {
@@ -26,9 +29,10 @@ const NoteForm = (props) => {
   }
 
   const checkIfUpdating = async () => {
+    setLoadingNote(true)
     if (props.updating) {
       try {
-        const response = await fetch(`/notes/${params.id}`, {
+        const response = await fetch(`${BASE_URL}/notes/${params.id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -47,6 +51,7 @@ const NoteForm = (props) => {
         alert(error.message)
       }
     }
+    setLoadingNote(false)
   }
 
   useEffect(() => {
@@ -56,37 +61,43 @@ const NoteForm = (props) => {
 
   return (
     <div className="container w-50 mx-auto my-4">
-      <h1>{props.updating ? 'Update Note' : 'Add Note'}</h1>
-      <form>
-        <div className="form-group">
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            className="form-control"
-            onChange={handleOnChange}
-            value={note.title}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="title">Description</label>
-          <textarea
-            name="description"
-            id="description"
-            className="form-control"
-            onChange={handleOnChange}
-            value={note.description}
-          ></textarea>
-        </div>
-        <button
-          className="btn btn-primary my-2"
-          onClick={handleSubmitForm}
-          disabled={loadingNote}
-        >
-          {props.updating ? 'Update Note' : 'Create Note'}
-        </button>
-      </form>
+      {loadingNote ? (
+        <h1>Loading...</h1>
+      ) : (
+        <>
+          <h1>{props.updating ? 'Update Note' : 'Add Note'}</h1>
+          <form>
+            <div className="form-group">
+              <label htmlFor="title">Title</label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                className="form-control"
+                onChange={handleOnChange}
+                value={note.title}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="title">Description</label>
+              <textarea
+                name="description"
+                id="description"
+                className="form-control"
+                onChange={handleOnChange}
+                value={note.description}
+              ></textarea>
+            </div>
+            <button
+              className="btn btn-primary my-2"
+              onClick={handleSubmitForm}
+              disabled={loadingNote}
+            >
+              {props.updating ? 'Update Note' : 'Create Note'}
+            </button>
+          </form>
+        </>
+      )}
     </div>
   )
 }

@@ -8,6 +8,8 @@ const NoteProvider = ({ children }) => {
     ? localStorage.getItem('token')
     : null
 
+  const BASE_URL = process.env.REACT_APP_BASE_URL
+
   const navigate = useNavigate()
   const [notes, setNotes] = useState([])
   const [loadingNote, setLoadingNote] = useState(false)
@@ -15,7 +17,7 @@ const NoteProvider = ({ children }) => {
   const fetchAllNotes = async () => {
     setLoadingNote(true)
     try {
-      const response = await fetch('/notes', {
+      const response = await fetch(`${BASE_URL}/notes`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -40,7 +42,7 @@ const NoteProvider = ({ children }) => {
   const getSingleNote = async (id) => {
     setLoadingNote(true)
     try {
-      const response = await fetch(`/notes/${id}`, {
+      const response = await fetch(`${BASE_URL}/notes/${id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -65,7 +67,7 @@ const NoteProvider = ({ children }) => {
   const createNote = async (body) => {
     setLoadingNote(true)
     try {
-      const response = await fetch('/notes', {
+      const response = await fetch(`${BASE_URL}/notes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -92,7 +94,7 @@ const NoteProvider = ({ children }) => {
   const updateNote = async (id, body) => {
     setLoadingNote(true)
     try {
-      const response = await fetch(`/notes/${id}`, {
+      const response = await fetch(`${BASE_URL}/notes/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -124,7 +126,7 @@ const NoteProvider = ({ children }) => {
   const deleteNote = async (id) => {
     setLoadingNote(true)
     try {
-      const response = await fetch(`/notes/${id}`, {
+      const response = await fetch(`${BASE_URL}/notes/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -155,6 +157,7 @@ const NoteProvider = ({ children }) => {
   const values = {
     notes,
     loadingNote,
+    setLoadingNote,
     getSingleNote,
     createNote,
     updateNote,

@@ -8,6 +8,8 @@ const AuthProvider = ({ children }) => {
     ? localStorage.getItem('token')
     : null
 
+  const BASE_URL = process.env.REACT_APP_BASE_URL
+
   const navigate = useNavigate()
 
   const [user, setUser] = useState(null)
@@ -16,7 +18,7 @@ const AuthProvider = ({ children }) => {
   const fetchUserData = async () => {
     setLoadingUser(true)
     try {
-      const response = await fetch('/auth/get-user', {
+      const response = await fetch(`${BASE_URL}/auth/get-user`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -44,7 +46,7 @@ const AuthProvider = ({ children }) => {
   const loginUser = async (body) => {
     setLoadingUser(true)
     try {
-      const response = await fetch('/auth/login', {
+      const response = await fetch(`${BASE_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,7 +71,7 @@ const AuthProvider = ({ children }) => {
   const registerUser = async (body) => {
     setLoadingUser(true)
     try {
-      const response = await fetch('/auth/register', {
+      const response = await fetch(`${BASE_URL}/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -8,7 +8,8 @@ const Notes = () => {
   return (
     <div className="row">
       <p className="my-2">
-        Total Notes :<strong> {notes.length}</strong>
+        Total Notes :
+        <strong> {loadingNote ? 'Counting...' : notes.length}</strong>
       </p>
       {loadingNote ? (
         <h1 className="text-center my-2">Loading...</h1>
